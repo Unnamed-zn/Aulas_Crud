@@ -1,6 +1,7 @@
 package model;
 
 public class Personagem {
+    private int id;
     private String jogador, nome, tema, origem;
     private int idade, fisico, destreza, intelecto, consciencia, presenca, pontosDeVida, pontosDeEspirito, pontosDeAcao, pontosDeDestino;
 
@@ -20,6 +21,14 @@ public class Personagem {
         this.presenca = presenca;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getJogador() {
         return jogador;
     }
