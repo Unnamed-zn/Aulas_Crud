@@ -43,18 +43,43 @@ public class Acesso {
         }
     }
     
-    public void atualizarString(String jogador, String personagem, String coluna, String novoValor) throws SQLException {
+    public void atualizar(String personagem, String coluna, String novoValor) throws SQLException {
         Connection conexao = SQL.conectar();
         if (!Colunas.contains(coluna)) {
             System.out.println("Campo declarado inválido.");
             return;
         }
         if (conexao!=null) {
-            String script = "update personagens set "+coluna+" = ? where nome = ? and jogador = ?";
+            String script = "update personagens set "+coluna+" = ? where nome = ?";
             try (PreparedStatement pst = conexao.prepareStatement(script)) {
                 pst.setString(1, novoValor);
                 pst.setString(2, personagem);
-                pst.setString(3, jogador);
+                
+                pst.executeUpdate();
+                System.out.println("Personagem atualizado com sucesso.");
+            } catch (SQLException e) {
+                System.out.println("Erro ao atualizar tabela. Código de erro: "+e.getMessage());
+            } finally {
+                try {
+                    conexao.close();
+                } catch (SQLException e) {
+                    System.out.println("Erro ao fechar conexão. Código de erro: "+e.getMessage());
+                }
+            }
+        }
+    }
+    
+    public void atualizar(String personagem, String coluna, int novoValor) throws SQLException {
+        Connection conexao = SQL.conectar();
+        if (!Colunas.contains(coluna)) {
+            System.out.println("Campo declarado inválido.");
+            return;
+        }
+        if (conexao!=null) {
+            String script = "update personagens set "+coluna+" = ? where nome = ?";
+            try (PreparedStatement pst = conexao.prepareStatement(script)) {
+                pst.setInt(1, novoValor);
+                pst.setString(2, personagem);
                 
                 pst.executeUpdate();
             } catch (SQLException e) {
@@ -69,22 +94,17 @@ public class Acesso {
         }
     }
     
-    public void atualizarInt(String jogador, String personagem, String coluna, int novoValor) throws SQLException {
+    public void deletar(String personagem, String jogador) throws SQLException {
         Connection conexao = SQL.conectar();
-        if (!Colunas.contains(coluna)) {
-            System.out.println("Campo declarado inválido.");
-            return;
-        }
         if (conexao!=null) {
-            String script = "update personagens set "+coluna+" = ? where nome = ? and jogador = ?";
+            String script = "delete from personagens where nome = ? and jogador = ?";
             try (PreparedStatement pst = conexao.prepareStatement(script)) {
-                pst.setInt(1, novoValor);
-                pst.setString(2, personagem);
-                pst.setString(3, jogador);
+                pst.setString(1, personagem);
+                pst.setString(2, jogador);
                 
                 pst.executeUpdate();
             } catch (SQLException e) {
-                System.out.println("Erro ao atualizar tabela. Código de erro: "+e.getMessage());
+                System.out.println("Erro ao deletar personagem. Código de erro: "+e.getMessage());
             } finally {
                 try {
                     conexao.close();
@@ -107,6 +127,7 @@ public class Acesso {
                 ResultSet rs = pst.executeQuery();
                 
                 while (rs.next()) {
+                    personagem.setId(rs.getInt("id"));
                     personagem.setJogador(rs.getString("jogador"));
                     personagem.setNome(rs.getString("nome"));
                     personagem.setTema(rs.getString("tema"));
@@ -150,6 +171,7 @@ public class Acesso {
                 ResultSet rs = pst.executeQuery();
                 
                 while (rs.next()) {
+                    personagem.setId(rs.getInt("id"));
                     personagem.setJogador(rs.getString("jogador"));
                     personagem.setNome(rs.getString("nome"));
                     personagem.setTema(rs.getString("tema"));
@@ -193,6 +215,7 @@ public class Acesso {
                 ResultSet rs = pst.executeQuery();
                 
                 while (rs.next()) {
+                    personagem.setId(rs.getInt("id"));
                     personagem.setJogador(rs.getString("jogador"));
                     personagem.setNome(rs.getString("nome"));
                     personagem.setTema(rs.getString("tema"));
