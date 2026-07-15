@@ -10,6 +10,7 @@ public class Utils {
     public static void criarTabelaPersonagens() throws SQLException {
         Connection conexao = SQL.conectar();
         String script = "create table if not exists personagens("
+                + "id int primary key auto_increment,"
                 + "jogador varchar(80),"
                 + "nome varchar(80),"
                 + "tema varchar(40),"
