@@ -178,7 +178,7 @@ public class Comando {
         try {
             intelecto = Integer.parseInt(intelectoSt);
             System.out.println("Valor de atributo definido.");
-        } catch (NumberFormatException e1) {
+        } catch (NumberFormatException e3) {
             if (intelectoSt.equals("")) {
                 System.out.println("Definindo atributo para 0.");
             } else {
@@ -193,7 +193,7 @@ public class Comando {
         try {
             consciencia = Integer.parseInt(conscienciaSt);
             System.out.println("Valor de atributo definido.");
-        } catch (NumberFormatException e1) {
+        } catch (NumberFormatException e4) {
             if (conscienciaSt.equals("")) {
                 System.out.println("Definindo atributo para 0.");
             } else {
@@ -208,7 +208,7 @@ public class Comando {
         try {
             presenca = Integer.parseInt(presencaSt);
             System.out.println("Valor de atributo definido.");
-        } catch (NumberFormatException e1) {
+        } catch (NumberFormatException e5) {
             if (presencaSt.equals("")) {
                 System.out.println("Definindo atributo para 0.");
             } else {
